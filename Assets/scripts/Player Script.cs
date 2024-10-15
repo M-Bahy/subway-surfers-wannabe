@@ -36,34 +36,25 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "invisible wall") {
             Debug.Log("You hit an invisible wall");
-            // Instantiate the new road segment
             GameObject newRoad = Instantiate(road);
-
             if (isFirstRoad)
             {
-                // Set the position for the first road segment
                 newRoad.transform.position = new Vector3(0.95f, -3.58f, 21.57883f);
                 isFirstRoad = false;
             }
             else
             {
-                // Set the position for subsequent road segments
-                //newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, road.transform.localScale.z);
                 newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, roadLength);
             }
-
-            // Update the last road position
             lastRoadPosition = newRoad.transform.position;
-
         }
     }
     
     private void FixedUpdate() {
-        rb.AddForce(new Vector3(0, 0, moveSpeed));
+        rb.velocity = new Vector3(0, 0, moveSpeed);
         if (Time.time - lastMoveTime < moveCooldown) {
             return;
         }
-    
         float motionX = Input.GetAxis("Horizontal");
         bool right = motionX > 0;
         bool left = motionX < 0;
