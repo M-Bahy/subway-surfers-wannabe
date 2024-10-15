@@ -15,8 +15,8 @@ public class PlayerScript : MonoBehaviour
 
     float roadLength = 24.53117f;
 
-     private Vector3 lastRoadPosition; // Position of the last instantiated road segment
-    private bool isFirstRoad = true; // Flag to check if it's the first road segment
+     private Vector3 lastRoadPosition; 
+    private bool isFirstRoad = true; 
 
 
     // Start is called before the first frame update
