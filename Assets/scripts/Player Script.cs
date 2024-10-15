@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     Rigidbody rb;
-    public GameObject tile;
     public GameObject road;
     int state ;
     float moveCooldown = 0.2f; 
@@ -32,7 +31,15 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "invisible wall") {
             Debug.Log("You hit an invisible wall");
-            Instantiate(road, new Vector3(0, 10, 0), Quaternion.identity);
+            //GameObject newRoad = Instantiate(road, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject newRoad = Instantiate(road);
+            float x = transform.position.x;
+            float y = transform.position.y ;
+            float z = transform.position.z;
+            if (state == 2) {
+                newRoad.transform.position = new Vector3(0.95f , -3.58f , 21.57883f);
+            }
+
         }
     }
     
