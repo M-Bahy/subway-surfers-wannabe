@@ -40,7 +40,8 @@ public class PlayerScript : MonoBehaviour
             GameObject newRoad = Instantiate(road);
             if (isFirstRoad)
             {
-                newRoad.transform.position = new Vector3(0.95f, -3.58f, 21.7f);
+                // 17.93
+                newRoad.transform.position = new Vector3(0.95f, -3.58f, 18.93f);
                 isFirstRoad = false;
             }
             else
