@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3813722281420495029}
   m_Layer: 0
-  m_Name: road
+  m_Name: Lane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
