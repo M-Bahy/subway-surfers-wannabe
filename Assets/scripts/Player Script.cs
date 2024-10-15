@@ -68,7 +68,6 @@ public class PlayerScript : MonoBehaviour
                     lastMoveTime = Time.time; 
                     break;
                 case 3:
-                    // change the x position of the player instantly
                     transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
                     state = 2;
                     lastMoveTime = Time.time; 
