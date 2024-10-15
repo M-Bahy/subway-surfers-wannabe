@@ -226,7 +226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2935036004689833230, guid: de39073fd2607a970a22f25383d68d05, type: 3}
       propertyPath: m_Name
-      value: road (2)
+      value: Lane 3
       objectReference: {fileID: 0}
     - target: {fileID: 3813722281420495029, guid: de39073fd2607a970a22f25383d68d05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -374,10 +374,11 @@ Transform:
   m_GameObject: {fileID: 747148857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.097, y: 0.578, z: -11.558}
+  m_LocalPosition: {x: 1.097, y: 0.578, z: -12.275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &747148862
@@ -417,7 +418,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &963194225
 GameObject:
@@ -505,11 +506,11 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.29680577, y: 0.015362857, z: -0.004777247, w: 0.95480233}
-  m_LocalPosition: {x: 0.9185404, y: 2.5139108, z: -13.089823}
+  m_LocalPosition: {x: -0.17845958, y: 1.9359107, z: -0.81482315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 747148861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1353906077
 PrefabInstance:
@@ -521,7 +522,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2935036004689833230, guid: de39073fd2607a970a22f25383d68d05, type: 3}
       propertyPath: m_Name
-      value: road (1)
+      value: Lane 2
       objectReference: {fileID: 0}
     - target: {fileID: 3813722281420495029, guid: de39073fd2607a970a22f25383d68d05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -578,7 +579,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2935036004689833230, guid: de39073fd2607a970a22f25383d68d05, type: 3}
       propertyPath: m_Name
-      value: road
+      value: Lane 1
       objectReference: {fileID: 0}
     - target: {fileID: 3813722281420495029, guid: de39073fd2607a970a22f25383d68d05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -629,7 +630,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 5092882706368618581}
   - {fileID: 1353906077}

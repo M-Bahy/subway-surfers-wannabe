@@ -8,8 +8,11 @@ public class PlayerScript : MonoBehaviour
     int state ;
     float moveCooldown = 0.2f; 
     float lastMoveTime = 0f; 
-
     float transitionSpeed = 2.0f;
+    float moveSpeed = 10.0f;
+    float fakeZcomponent = 0.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,7 @@ public class PlayerScript : MonoBehaviour
         
     
     private void FixedUpdate() {
-        rb.AddForce(new Vector3(0, 0, 3));
+        rb.AddForce(new Vector3(0, 0, moveSpeed));
         if (Time.time - lastMoveTime < moveCooldown) {
             return;
         }
@@ -39,12 +42,12 @@ public class PlayerScript : MonoBehaviour
         if (right) {
             switch (state) {
                 case 1:
-                    transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y , transform.position.z+ 0.2f);
+                    transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y , transform.position.z+ fakeZcomponent);
                     state = 2;
                     lastMoveTime = Time.time; 
                     break;
                 case 2:
-                    transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y, transform.position.z+ 0.2f);
+                    transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
                     state = 3;
                     lastMoveTime = Time.time; 
                     break;
@@ -60,13 +63,13 @@ public class PlayerScript : MonoBehaviour
                     Debug.Log("Invalid move");
                     break;
                 case 2:
-                    transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ 0.2f);
+                    transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
                     state = 1;
                     lastMoveTime = Time.time; 
                     break;
                 case 3:
                     // change the x position of the player instantly
-                    transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ 0.2f);
+                    transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
                     state = 2;
                     lastMoveTime = Time.time; 
                     break;
