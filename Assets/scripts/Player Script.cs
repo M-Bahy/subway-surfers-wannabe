@@ -13,6 +13,11 @@ public class PlayerScript : MonoBehaviour
     float moveSpeed = 10.0f;
     float fakeZcomponent = 0.0f;
 
+    float roadLength = 24.53117f;
+
+     private Vector3 lastRoadPosition; // Position of the last instantiated road segment
+    private bool isFirstRoad = true; // Flag to check if it's the first road segment
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +36,24 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "invisible wall") {
             Debug.Log("You hit an invisible wall");
-            //GameObject newRoad = Instantiate(road, new Vector3(0, 0, 0), Quaternion.identity);
+            // Instantiate the new road segment
             GameObject newRoad = Instantiate(road);
-            float x = transform.position.x;
-            float y = transform.position.y ;
-            float z = transform.position.z;
-            if (state == 2) {
-                newRoad.transform.position = new Vector3(0.95f , -3.58f , 21.57883f);
+
+            if (isFirstRoad)
+            {
+                // Set the position for the first road segment
+                newRoad.transform.position = new Vector3(0.95f, -3.58f, 21.57883f);
+                isFirstRoad = false;
             }
+            else
+            {
+                // Set the position for subsequent road segments
+                //newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, road.transform.localScale.z);
+                newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, roadLength);
+            }
+
+            // Update the last road position
+            lastRoadPosition = newRoad.transform.position;
 
         }
     }
