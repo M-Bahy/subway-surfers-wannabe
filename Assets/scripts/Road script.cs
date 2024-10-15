@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class Roadscript : MonoBehaviour
 {
-    Rigidbody rb;
+    public float moveSpeed = -2.5f; // Set your desired constant speed
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        
+        // No need to get Rigidbody if not using it
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void FixedUpdate() {
-        rb.velocity = new Vector3(0, 0, -2.5f);
+        // Move the object at a constant speed
+        transform.position += new Vector3(0, 0, moveSpeed * Time.deltaTime);
     }
 }

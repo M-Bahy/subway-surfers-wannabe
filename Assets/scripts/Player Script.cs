@@ -10,13 +10,14 @@ public class PlayerScript : MonoBehaviour
     float moveCooldown = 0.2f; 
     float lastMoveTime = 0f; 
     float transitionSpeed = 2.0f;
-    float moveSpeed = 10.0f;
+    float moveSpeed = 7.5f;
     float fakeZcomponent = 0.0f;
 
-    float roadLength = 24.53117f;
+    float roadLength = 23.0f;
 
      private Vector3 lastRoadPosition; 
     private bool isFirstRoad = true; 
+    
 
 
     // Start is called before the first frame update
@@ -39,12 +40,13 @@ public class PlayerScript : MonoBehaviour
             GameObject newRoad = Instantiate(road);
             if (isFirstRoad)
             {
-                newRoad.transform.position = new Vector3(0.95f, -3.58f, 21.57883f);
+                newRoad.transform.position = new Vector3(0.95f, -3.58f, 21.7f);
                 isFirstRoad = false;
             }
             else
             {
-                newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, roadLength);
+                // -4.53542
+                newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, roadLength-4.53f);
             }
             lastRoadPosition = newRoad.transform.position;
         }
