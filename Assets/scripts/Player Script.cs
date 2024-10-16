@@ -22,7 +22,7 @@ public class PlayerScript : MonoBehaviour
     private float invalidMoveCooldown = 0.5f; // Cooldown duration for invalid moves
     private float lastInvalidMoveTime = 0f;
 
-    private float jumpForce = 0.0001f; // Force applied for the jump
+    private float jumpForce = 5.0f; // Force applied for the jump
     private bool isJumping = false; // Flag to check if the player is jumping
     float jumpZcomponent = 3.8f;
 
@@ -52,13 +52,14 @@ private void OnTriggerEnter(Collider other)
     }
 }
 
-    private GameObject generateTiles(GameObject newRoad)
+       private GameObject generateTiles(GameObject newRoad)
     {
         Transform[] children = newRoad.GetComponentsInChildren<Transform>();
-        Transform[] Lane1 =null;
-        Transform[] Lane2 =null;
-        Transform[] Lane3 =null;
-        // print the children names
+        Transform[] Lane1 = null;
+        Transform[] Lane2 = null;
+        Transform[] Lane3 = null;
+    
+        // Find the lanes
         foreach (Transform child in children)
         {
             if (child.name == "Lane 1")
@@ -74,13 +75,21 @@ private void OnTriggerEnter(Collider other)
                 Lane3 = child.GetComponentsInChildren<Transform>();
             }
         }
-
-        
-
-
+    
+        // Replace the 2nd tile in lane 1 with a random tile
+        Transform oldTileTransform = Lane1[1];
+        GameObject tilePrefab = tiles[UnityEngine.Random.Range(0, tiles.Length)];
+        Vector3 oldTilePosition = oldTileTransform.position;
+        Quaternion oldTileRotation = oldTileTransform.rotation;
+        Transform oldTileParent = oldTileTransform.parent;
+    
+        Destroy(oldTileTransform.gameObject);
+    
+        GameObject newTile = Instantiate(tilePrefab, oldTilePosition, oldTileRotation);
+        newTile.transform.parent = oldTileParent;
+    
         return newRoad;
     }
-
     private void FixedUpdate()
     {
         

@@ -344,7 +344,7 @@ MonoBehaviour:
   - {fileID: 9210282311107709873, guid: 14132a89efe228faa9346191af3e031c, type: 3}
   - {fileID: 1118608406782883989, guid: ca958ca86dd0011b3b331a0bd074f7ad, type: 3}
   - {fileID: 4392075826794134023, guid: fa25c2cb5a1473abc91634bd65bcb623, type: 3}
-  - {fileID: 5704457724814446308, guid: f783b630447222b0bb6a5ed6561a6602, type: 3}
+  - {fileID: 4190276339155975544, guid: 2bec3ae77be7c7ffbae75c708fa89c7b, type: 3}
 --- !u!54 &747148863
 Rigidbody:
   m_ObjectHideFlags: 0
