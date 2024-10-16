@@ -30,7 +30,7 @@ public class AliothScript : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "first road") {
             Debug.Log("You hit the first road with a trigger");
-            moveSpeed = 7.5f;
+            moveSpeed = 7.0f;
         }}
 
 }

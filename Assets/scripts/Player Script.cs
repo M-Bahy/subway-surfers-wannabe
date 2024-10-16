@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,12 +43,42 @@ private void OnTriggerEnter(Collider other)
     if (other.gameObject.tag == "invisible wall")
     {
         GameObject newRoad = Instantiate(road);
+        newRoad = generateTiles(newRoad);
         float roadLength = 23.0f;
         float playerZ = transform.position.z;
         newRoad.transform.position = new Vector3(lastRoadPosition.x, lastRoadPosition.y, playerZ + roadLength);
         lastRoadPosition = newRoad.transform.position;
     }
 }
+
+    private GameObject generateTiles(GameObject newRoad)
+    {
+        Transform[] children = newRoad.GetComponentsInChildren<Transform>();
+        Transform[] Lane1 =null;
+        Transform[] Lane2 =null;
+        Transform[] Lane3 =null;
+        // print the children names
+        foreach (Transform child in children)
+        {
+            if (child.name == "Lane 1")
+            {
+                Lane1 = child.GetComponentsInChildren<Transform>();
+            }
+            if (child.name == "Lane 2")
+            {
+                Lane2 = child.GetComponentsInChildren<Transform>();
+            }
+            if (child.name == "Lane 3")
+            {
+                Lane3 = child.GetComponentsInChildren<Transform>();
+            }
+        }
+
+        
+
+
+        return newRoad;
+    }
 
     private void FixedUpdate()
     {
