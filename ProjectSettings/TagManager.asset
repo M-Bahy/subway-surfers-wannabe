@@ -8,6 +8,11 @@ TagManager:
   - eater
   - first road
   - road
+  - Burning Tile
+  - Empty Tile
+  - Supplies Tile
+  - Boost Tile
+  - Sticky Tile
   layers:
   - Default
   - TransparentFX

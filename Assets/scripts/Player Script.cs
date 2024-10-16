@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
 {
     Rigidbody rb;
     public GameObject road;
+    public GameObject [] tiles;
     int state;
     float moveCooldown = 0.2f;
     float lastMoveTime = 0f;
@@ -21,7 +22,7 @@ public class PlayerScript : MonoBehaviour
     private float invalidMoveCooldown = 0.5f; // Cooldown duration for invalid moves
     private float lastInvalidMoveTime = 0f;
 
-    public float jumpForce = 0.0001f; // Force applied for the jump
+    private float jumpForce = 0.0001f; // Force applied for the jump
     private bool isJumping = false; // Flag to check if the player is jumping
     float jumpZcomponent = 3.8f;
 

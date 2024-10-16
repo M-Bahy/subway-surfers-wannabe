@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3300635121997605570, guid: 9270649ea4d2d9b448794d6b71b8c853, type: 3}
       propertyPath: m_Name
-      value: Tile_Acc_PlanksV1 Variant
+      value: Burning Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300635121997605570, guid: 9270649ea4d2d9b448794d6b71b8c853, type: 3}
+      propertyPath: m_TagString
+      value: Burning Tile
       objectReference: {fileID: 0}
     - target: {fileID: 3949316401977084695, guid: 9270649ea4d2d9b448794d6b71b8c853, type: 3}
       propertyPath: m_Materials.Array.data[0]
