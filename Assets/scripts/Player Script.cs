@@ -26,6 +26,8 @@ public class PlayerScript : MonoBehaviour
     private float jumpForce = 5.0f; // Force applied for the jump
     private bool isJumping = false; // Flag to check if the player is jumping
     float jumpZcomponent = 3.8f;
+    int maxChangesPerRoad = 1; // Variable to control the maximum number of changes per road
+
 
 
     // Start is called before the first frame update
@@ -53,55 +55,165 @@ private void OnTriggerEnter(Collider other)
     }
 }
 
-       private GameObject generateTiles(GameObject newRoad)
+
+private GameObject generateTiles(GameObject newRoad)
+{
+    Transform[] children = newRoad.GetComponentsInChildren<Transform>();
+    Transform[] Lane1 = null;
+    Transform[] Lane2 = null;
+    Transform[] Lane3 = null;
+
+    // Find the lanes
+    foreach (Transform child in children)
     {
-        Transform[] children = newRoad.GetComponentsInChildren<Transform>();
-        Transform[] Lane1 = null;
-        Transform[] Lane2 = null;
-        Transform[] Lane3 = null;
-    
-        // Find the lanes
-        foreach (Transform child in children)
+        if (child.name == "Lane 1")
         {
-            if (child.name == "Lane 1")
-            {
-                Lane1 = child.GetComponentsInChildren<Transform>();
-            }
-            if (child.name == "Lane 2")
-            {
-                Lane2 = child.GetComponentsInChildren<Transform>();
-            }
-            if (child.name == "Lane 3")
-            {
-                Lane3 = child.GetComponentsInChildren<Transform>();
-            }
+            Lane1 = child.GetComponentsInChildren<Transform>();
         }
-    
-        // Replace the 2nd tile in lane 1 with a random tile
-        Transform oldTileTransform = Lane1[1];
-        int randIndix = UnityEngine.Random.Range(0, tiles.Length);
-        GameObject tilePrefab = tiles[randIndix];
-        Vector3 oldTilePosition = oldTileTransform.position;
-        Quaternion oldTileRotation = oldTileTransform.rotation;
-        Transform oldTileParent = oldTileTransform.parent;
-    
-        Destroy(oldTileTransform.gameObject);
-    
-        GameObject newTile = Instantiate(tilePrefab, oldTilePosition, oldTileRotation);
-        newTile.transform.parent = oldTileParent;
-
-        if (randIndix != 2){
-        // put a sign on the tile
-        GameObject sign = Instantiate(signPrefab);
-        sign.transform.position = new Vector3(newTile.transform.position.x-1, newTile.transform.position.y + 0.369f, newTile.transform.position.z+1);
-        sign.transform.parent = newTile.transform;
-
+        if (child.name == "Lane 2")
+        {
+            Lane2 = child.GetComponentsInChildren<Transform>();
         }
-        
-    
-        return newRoad;
+        if (child.name == "Lane 3")
+        {
+            Lane3 = child.GetComponentsInChildren<Transform>();
+        }
     }
-    private void FixedUpdate()
+
+    int changesMade = 0; // Counter to keep track of the number of changes made
+
+    // Iterate through the tiles in each lane
+    for (int i = 0; i < 12; i++)
+    {
+        if (changesMade >= maxChangesPerRoad)
+        {
+            break; // Stop making changes if the maximum number of changes is reached
+        }
+
+        bool lane1Changed = false;
+        bool lane2Changed = false;
+        bool lane3Changed = false;
+
+        // Randomly decide whether to put a sign or replace the tile with a special tile
+        int randAction1 = UnityEngine.Random.Range(0, 3); // 0: unchanged, 1: put sign, 2: replace with special tile
+        int randAction2 = UnityEngine.Random.Range(0, 3); // 0: unchanged, 1: put sign, 2: replace with special tile
+        int randAction3 = UnityEngine.Random.Range(0, 3); // 0: unchanged, 1: put sign, 2: replace with special tile
+
+        // Ensure at least one tile in the horizontal piece remains unchanged
+        if (randAction1 != 0 && randAction2 != 0 && randAction3 != 0)
+        {
+            int randLane = UnityEngine.Random.Range(0, 3);
+            if (randLane == 0)
+            {
+                randAction1 = 0;
+            }
+            else if (randLane == 1)
+            {
+                randAction2 = 0;
+            }
+            else
+            {
+                randAction3 = 0;
+            }
+        }
+
+        if (randAction1 == 1 && !lane1Changed && changesMade < maxChangesPerRoad)
+        {
+            // Put a sign on the tile in Lane 1
+            GameObject sign = Instantiate(signPrefab);
+            sign.transform.position = new Vector3(Lane1[i].position.x - 1, Lane1[i].position.y + 1.304f, Lane1[i].position.z + 2.392f);
+            sign.transform.parent = Lane1[i];
+            lane1Changed = true;
+            changesMade++;
+            string tileName = Lane1[i].name;
+            Debug.Log($"Sign placed on Lane 1, Tile {tileName}");
+        }
+        else if (randAction1 == 2 && !lane1Changed && changesMade < maxChangesPerRoad)
+        {
+            // Replace the tile in Lane 1 with a random special tile
+            int randIndex = UnityEngine.Random.Range(0, tiles.Length);
+            GameObject tilePrefab = tiles[randIndex];
+            Vector3 oldTilePosition = Lane1[i].position;
+            Quaternion oldTileRotation = Lane1[i].rotation;
+            Transform oldTileParent = Lane1[i].parent;
+
+            Destroy(Lane1[i].gameObject);
+
+            GameObject newTile = Instantiate(tilePrefab, oldTilePosition, oldTileRotation);
+            newTile.transform.parent = oldTileParent;
+            Lane1[i] = newTile.transform;
+            lane1Changed = true;
+            changesMade++;
+            string tileName = Lane1[i].name;
+            Debug.Log($"Tile replaced in Lane 1, Tile {tileName}");
+        }
+
+        if (randAction2 == 1 && !lane2Changed && changesMade < maxChangesPerRoad)
+        {
+            // Put a sign on the tile in Lane 2
+            GameObject sign = Instantiate(signPrefab);
+            sign.transform.position = new Vector3(Lane2[i].position.x - 1, Lane2[i].position.y + 1.304f, Lane2[i].position.z + 2.392f);
+            sign.transform.parent = Lane2[i];
+            lane2Changed = true;
+            changesMade++;
+            String tileName = Lane2[i].name;
+            Debug.Log($"Sign placed on Lane 2, Tile {tileName}");
+        }
+        else if (randAction2 == 2 && !lane2Changed && changesMade < maxChangesPerRoad)
+        {
+            // Replace the tile in Lane 2 with a random special tile
+            int randIndex = UnityEngine.Random.Range(0, tiles.Length);
+            GameObject tilePrefab = tiles[randIndex];
+            Vector3 oldTilePosition = Lane2[i].position;
+            Quaternion oldTileRotation = Lane2[i].rotation;
+            Transform oldTileParent = Lane2[i].parent;
+
+            Destroy(Lane2[i].gameObject);
+
+            GameObject newTile = Instantiate(tilePrefab, oldTilePosition, oldTileRotation);
+            newTile.transform.parent = oldTileParent;
+            Lane2[i] = newTile.transform;
+            lane2Changed = true;
+            changesMade++;
+            String tileName = Lane2[i].name;
+            Debug.Log($"Tile replaced in Lane 2, Tile {tileName}");
+        }
+
+        if (randAction3 == 1 && !lane3Changed && changesMade < maxChangesPerRoad)
+        {
+            // Put a sign on the tile in Lane 3
+            GameObject sign = Instantiate(signPrefab);
+            sign.transform.position = new Vector3(Lane3[i].position.x - 1, Lane3[i].position.y + 1.304f, Lane3[i].position.z + 2.392f);
+            sign.transform.parent = Lane3[i];
+            lane3Changed = true;
+            changesMade++;
+            Transform tileName = Lane3[i];
+            Debug.Log($"Sign placed on Lane 3, Tile {tileName}");            
+        }
+        else if (randAction3 == 2 && !lane3Changed && changesMade < maxChangesPerRoad)
+        {
+            // Replace the tile in Lane 3 with a random special tile
+            int randIndex = UnityEngine.Random.Range(0, tiles.Length);
+            GameObject tilePrefab = tiles[randIndex];
+            Vector3 oldTilePosition = Lane3[i].position;
+            Quaternion oldTileRotation = Lane3[i].rotation;
+            Transform oldTileParent = Lane3[i].parent;
+
+            Destroy(Lane3[i].gameObject);
+
+            GameObject newTile = Instantiate(tilePrefab, oldTilePosition, oldTileRotation);
+            newTile.transform.parent = oldTileParent;
+            Lane3[i] = newTile.transform;
+            lane3Changed = true;
+            changesMade++;
+            String tileName = Lane3[i].name;
+            Debug.Log($"Tile replaced in Lane 3, Tile {tileName}");
+        }
+    }
+
+    return newRoad;
+}
+private void FixedUpdate()
     {
         
         if (!isJumping)
