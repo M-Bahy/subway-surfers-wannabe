@@ -7,6 +7,7 @@ TagManager:
   - invisible wall
   - eater
   - first road
+  - road
   layers:
   - Default
   - TransparentFX

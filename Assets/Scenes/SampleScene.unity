@@ -317,10 +317,11 @@ Transform:
   m_GameObject: {fileID: 747148857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.097, y: 0.578, z: -12.275}
+  m_LocalPosition: {x: 1.097, y: 0.578, z: -11.737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &747148862
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   road: {fileID: 5531290827055267983, guid: a7ccb2c54b92ddcb99fdb92415b66f12, type: 3}
+  jumpForce: 5
 --- !u!54 &747148863
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -448,12 +450,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.13325667, y: -0.657213, z: 0.11967909, w: -0.73211384}
-  m_LocalPosition: {x: -26.269037, y: 11.872934, z: -4.1513352}
+  m_LocalRotation: {x: -0.17764698, y: -0.049547613, z: 0.008997071, w: -0.98280495}
+  m_LocalPosition: {x: 0.18269253, y: 1.630358, z: -2.409464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 747148861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031646777
 GameObject:
@@ -549,6 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e190c6b14a3b4b68cb937a68ddca2635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: -0.005
 --- !u!1 &1956260603 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5531290827055267983, guid: a7ccb2c54b92ddcb99fdb92415b66f12, type: 3}
@@ -573,8 +576,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.589731, y: 7.5591736, z: 14.65098}
-  m_Center: {x: 3.359838, y: 3.2795877, z: 3.4144924}
+  m_Size: {x: 8.589731, y: 7.5591736, z: 20.58905}
+  m_Center: {x: 3.359838, y: 3.2795877, z: 0.44545746}
 --- !u!1001 &1235591159512051645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -583,6 +586,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8740551716337956442, guid: a7ccb2c54b92ddcb99fdb92415b66f12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4360744758457041834, guid: a7ccb2c54b92ddcb99fdb92415b66f12, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9565115
@@ -647,4 +654,3 @@ SceneRoots:
   - {fileID: 747148861}
   - {fileID: 1235591159512051645}
   - {fileID: 1031646779}
-  - {fileID: 963194228}

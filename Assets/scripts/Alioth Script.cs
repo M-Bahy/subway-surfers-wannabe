@@ -6,6 +6,7 @@ public class AliothScript : MonoBehaviour
 {
     Rigidbody rb;
     public float moveSpeed = 0.005f; // Set your desired constant speed
+    public static bool isAllowedToMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +18,9 @@ public class AliothScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0, 0, moveSpeed * Time.deltaTime);
-
+        if (isAllowedToMove){
+            transform.position += new Vector3(0, 0, moveSpeed * Time.deltaTime);
+        }
     }
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "first road") {
