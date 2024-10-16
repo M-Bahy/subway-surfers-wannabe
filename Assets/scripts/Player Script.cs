@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     Rigidbody rb;
     public GameObject road;
     public GameObject [] tiles;
+    public GameObject signPrefab;
     int state;
     float moveCooldown = 0.2f;
     float lastMoveTime = 0f;
@@ -78,7 +79,8 @@ private void OnTriggerEnter(Collider other)
     
         // Replace the 2nd tile in lane 1 with a random tile
         Transform oldTileTransform = Lane1[1];
-        GameObject tilePrefab = tiles[UnityEngine.Random.Range(0, tiles.Length)];
+        int randIndix = UnityEngine.Random.Range(0, tiles.Length);
+        GameObject tilePrefab = tiles[randIndix];
         Vector3 oldTilePosition = oldTileTransform.position;
         Quaternion oldTileRotation = oldTileTransform.rotation;
         Transform oldTileParent = oldTileTransform.parent;
@@ -87,6 +89,15 @@ private void OnTriggerEnter(Collider other)
     
         GameObject newTile = Instantiate(tilePrefab, oldTilePosition, oldTileRotation);
         newTile.transform.parent = oldTileParent;
+
+        if (randIndix != 2){
+        // put a sign on the tile
+        GameObject sign = Instantiate(signPrefab);
+        sign.transform.position = new Vector3(newTile.transform.position.x-1, newTile.transform.position.y + 0.369f, newTile.transform.position.z+1);
+        sign.transform.parent = newTile.transform;
+
+        }
+        
     
         return newRoad;
     }
