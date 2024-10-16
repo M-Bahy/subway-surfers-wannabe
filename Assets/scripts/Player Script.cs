@@ -13,9 +13,8 @@ public class PlayerScript : MonoBehaviour
     float moveSpeed = 7.5f;
     float fakeZcomponent = 0.0f;
     
-    float roadLength = 23.0f;
 
-    private Vector3 lastRoadPosition;
+    private Vector3 lastRoadPosition = new Vector3(0.9565115f, -3.598834f, -2.844748f);
     private bool isFirstRoad = true;
     private bool invalidMoveDetected = false;
     private float invalidMoveCooldown = 0.5f; // Cooldown duration for invalid moves
@@ -23,7 +22,7 @@ public class PlayerScript : MonoBehaviour
 
     public float jumpForce = 0.0001f; // Force applied for the jump
     private bool isJumping = false; // Flag to check if the player is jumping
-    float jumpZcomponent = 1.0f;
+    float jumpZcomponent = 3.8f;
 
 
     // Start is called before the first frame update
@@ -38,24 +37,17 @@ public class PlayerScript : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
+{
+    if (other.gameObject.tag == "invisible wall")
     {
-        if (other.gameObject.tag == "invisible wall")
-        {
-            GameObject newRoad = Instantiate(road);
-            if (isFirstRoad)
-            {
-                newRoad.transform.position = new Vector3(0.95f, -3.58f, 18.93f);
-                isFirstRoad = false;
-            }
-            else
-            {
-                newRoad.transform.position = lastRoadPosition + new Vector3(0, 0, roadLength - 4.53f);
-            }
-           lastRoadPosition = newRoad.transform.position;
-        }
+        GameObject newRoad = Instantiate(road);
+        float roadLength = 23.0f;
+        float playerZ = transform.position.z;
+        newRoad.transform.position = new Vector3(lastRoadPosition.x, lastRoadPosition.y, playerZ + roadLength);
+        lastRoadPosition = newRoad.transform.position;
     }
+}
 
     private void FixedUpdate()
     {
@@ -143,7 +135,7 @@ public class PlayerScript : MonoBehaviour
     {
         isJumping = true;
        // do it with velocity
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z/2.5f);
+        rb.velocity = new Vector3(rb.velocity.x, jumpForce, jumpZcomponent);
     }
 
     private void OnCollisionEnter(Collision collision)
