@@ -13,6 +13,7 @@ TagManager:
   - Supplies Tile
   - Boost Tile
   - Sticky Tile
+  - Obstcle Tile
   layers:
   - Default
   - TransparentFX
