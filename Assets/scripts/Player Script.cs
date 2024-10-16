@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     
 
     private Vector3 lastRoadPosition = new Vector3(0.9565115f, -3.598834f, -2.844748f);
-    private bool isFirstRoad = true;
+    //private bool isFirstRoad = true;
     private bool invalidMoveDetected = false;
     private float invalidMoveCooldown = 0.5f; // Cooldown duration for invalid moves
     private float lastInvalidMoveTime = 0f;
@@ -151,7 +151,6 @@ private void OnTriggerEnter(Collider other)
         if (jump && !isJumping)
         {
             Roadscript.isAllowedToMove = false;
-            AliothScript.isAllowedToMove = false;
             Jump();
         }
 
@@ -174,7 +173,6 @@ private void OnTriggerEnter(Collider other)
         if (collision.gameObject.tag.ToLower().Contains("road"))
         {
             isJumping = false;
-            AliothScript.isAllowedToMove = true;
             Roadscript.isAllowedToMove = true;
             
         }
