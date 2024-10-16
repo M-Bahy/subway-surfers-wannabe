@@ -18,7 +18,9 @@ public class PlayerScript : MonoBehaviour
 
      private Vector3 lastRoadPosition; 
     private bool isFirstRoad = true; 
-    
+    private bool invalidMoveDetected = false;
+private float invalidMoveCooldown = 0.5f; // Cooldown duration for invalid moves
+private float lastInvalidMoveTime = 0f;
 
 
     // Start is called before the first frame update
@@ -55,49 +57,64 @@ public class PlayerScript : MonoBehaviour
         
     }
     
-    private void FixedUpdate() {
-        rb.velocity = new Vector3(0, 0, moveSpeed);
-        if (Time.time - lastMoveTime < moveCooldown) {
-            return;
-        }
-        float motionX = Input.GetAxis("Horizontal");
-        bool right = motionX > 0;
-        bool left = motionX < 0;
-    
-        if (right) {
-            switch (state) {
-                case 1:
-                    transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y , transform.position.z+ fakeZcomponent);
-                    state = 2;
-                    lastMoveTime = Time.time; 
-                    break;
-                case 2:
-                    transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
-                    state = 3;
-                    lastMoveTime = Time.time; 
-                    break;
-                case 3:
+   private void FixedUpdate() {
+    rb.velocity = new Vector3(0, 0, moveSpeed);
+    if (Time.time - lastMoveTime < moveCooldown) {
+        return;
+    }
+    float motionX = Input.GetAxis("Horizontal");
+    bool right = motionX > 0;
+    bool left = motionX < 0;
+
+    if (right) {
+        switch (state) {
+            case 1:
+                transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y , transform.position.z + fakeZcomponent);
+                state = 2;
+                lastMoveTime = Time.time; 
+                break;
+            case 2:
+                transform.position = new Vector3(transform.position.x + transitionSpeed, transform.position.y, transform.position.z + fakeZcomponent);
+                state = 3;
+                lastMoveTime = Time.time; 
+                break;
+            case 3:
+                if (!invalidMoveDetected || Time.time - lastInvalidMoveTime > invalidMoveCooldown) {
                     Debug.Log("Invalid move");
-                    break;
-            }
-        }
-    
-        if (left) {
-            switch (state) {
-                case 1:
-                    Debug.Log("Invalid move");
-                    break;
-                case 2:
-                    transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
-                    state = 1;
-                    lastMoveTime = Time.time; 
-                    break;
-                case 3:
-                    transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z+ fakeZcomponent);
-                    state = 2;
-                    lastMoveTime = Time.time; 
-                    break;
-            }
+                    invalidMoveDetected = true;
+                    lastInvalidMoveTime = Time.time;
+                }
+                motionX = 0;
+                break;
         }
     }
+
+    if (left) {
+        switch (state) {
+            case 1:
+                if (!invalidMoveDetected || Time.time - lastInvalidMoveTime > invalidMoveCooldown) {
+                    Debug.Log("Invalid move");
+                    invalidMoveDetected = true;
+                    lastInvalidMoveTime = Time.time;
+                }
+                motionX = 0;
+                break;
+            case 2:
+                transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z + fakeZcomponent);
+                state = 1;
+                lastMoveTime = Time.time; 
+                break;
+            case 3:
+                transform.position = new Vector3(transform.position.x - transitionSpeed, transform.position.y, transform.position.z + fakeZcomponent);
+                state = 2;
+                lastMoveTime = Time.time; 
+                break;
+        }
+    }
+
+    // Reset the invalid move detection flag after the cooldown period
+    if (invalidMoveDetected && Time.time - lastInvalidMoveTime > invalidMoveCooldown) {
+        invalidMoveDetected = false;
+    }
+}
 }
