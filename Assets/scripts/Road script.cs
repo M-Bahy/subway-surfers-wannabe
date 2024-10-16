@@ -12,6 +12,12 @@ public class Roadscript : MonoBehaviour
         // No need to get Rigidbody if not using it
     }
 
+    private void OnTriggerEnter(Collider other) {
+         if (other.gameObject.tag == "eater") {
+            Destroy(this.gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

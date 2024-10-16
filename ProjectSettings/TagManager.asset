@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - invisible wall
+  - eater
+  - first road
   layers:
   - Default
   - TransparentFX

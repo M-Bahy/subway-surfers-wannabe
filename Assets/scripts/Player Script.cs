@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -36,7 +37,7 @@ public class PlayerScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "invisible wall") {
-            Debug.Log("You hit an invisible wall");
+          //  Debug.Log("You hit an invisible wall");
             GameObject newRoad = Instantiate(road);
             if (isFirstRoad)
             {
@@ -51,6 +52,7 @@ public class PlayerScript : MonoBehaviour
             }
             lastRoadPosition = newRoad.transform.position;
         }
+        
     }
     
     private void FixedUpdate() {
