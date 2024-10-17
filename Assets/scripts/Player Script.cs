@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
 
     public TMP_Text scoreText; // Score : 0
     public TMP_Text speedText; // Speed : normal
+    int speedState = 1; // 1: Normal , 2: High
     public TMP_Text fuelText; // Fuel : 50
 
     private float score = 0f; // Variable to keep track of the score
@@ -66,6 +67,11 @@ public class PlayerScript : MonoBehaviour
             float playerZ = transform.position.z;
             newRoad.transform.position = new Vector3(lastRoadPosition.x, lastRoadPosition.y, playerZ + roadLength);
             lastRoadPosition = newRoad.transform.position;
+        }
+        if (other.gameObject.tag == "Boost Tile")
+        
+        {
+            Debug.Log("THIS IS A BOOST TILE (from on Trigger method)");
         }
     }
 
@@ -251,6 +257,12 @@ public class PlayerScript : MonoBehaviour
         if (!isJumping)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, moveSpeed);
+
+           // Clamp the player's y position to 0.57 if not jumping
+            if (transform.position.y > 0.57f)
+            {
+                transform.position = new Vector3(transform.position.x, 0.57f, transform.position.z);
+            }
         }
         if (Time.time - lastMoveTime < moveCooldown)
         {
@@ -339,6 +351,10 @@ public class PlayerScript : MonoBehaviour
         {
             isJumping = false;
             Roadscript.isAllowedToMove = true;
+        }
+        if (collision.gameObject.tag == "Boost Tile")
+        {
+            Debug.Log("THIS IS A BOOST TILE (from on Collision method)");
         }
     }
 }
