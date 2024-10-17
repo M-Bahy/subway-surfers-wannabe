@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -27,6 +28,10 @@ public class PlayerScript : MonoBehaviour
     private bool isJumping = false; // Flag to check if the player is jumping
     float jumpZcomponent = 3.8f;
     int maxChangesPerRoad = 7; // Variable to control the maximum number of changes per road
+
+    public TMP_Text scoreText; // Score : 0
+    public TMP_Text speedText; // Speed : normal
+    public TMP_Text fuelText; // Fuel : 50
 
 
 
