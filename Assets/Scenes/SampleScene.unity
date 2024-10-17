@@ -344,7 +344,7 @@ MonoBehaviour:
   - {fileID: 9210282311107709873, guid: 14132a89efe228faa9346191af3e031c, type: 3}
   - {fileID: 1118608406782883989, guid: ca958ca86dd0011b3b331a0bd074f7ad, type: 3}
   - {fileID: 4392075826794134023, guid: fa25c2cb5a1473abc91634bd65bcb623, type: 3}
-  signPrefab: {fileID: 4111168626975194829, guid: a080aa03b59f6a69b87dcedcba8ea9b1, type: 3}
+  signPrefab: {fileID: 8383832788356497406, guid: 2d4eb1bbafe9acb0abd5baeeb9bf646b, type: 3}
 --- !u!54 &747148863
 Rigidbody:
   m_ObjectHideFlags: 0
