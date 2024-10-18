@@ -139,9 +139,7 @@ public class PlayerScript : MonoBehaviour
         
         {
             Debug.Log("THIS IS AN OBSTACLE TILE ");
-            // freeze the entire game
             gameOver = true;
-            // freez the time
             Time.timeScale = 0f;
             
         }
