@@ -102,7 +102,15 @@ public class PlayerScript : MonoBehaviour
           else if (other.gameObject.tag == "Sticky Tile")
         
         {
-            Debug.Log("THIS IS A STICKY TILE ");
+            // Debug.Log("THIS IS A STICKY TILE ");
+             if (speedState == 1)
+            {
+                return;
+            }
+            moveSpeed = moveSpeed / 2;
+            speedState = 1;
+            speedText.text = "Speed: Normal";
+            jumpZcomponent = 3.8f;
             
         }
         else if (other.gameObject.tag == "Obstacle Tile")
