@@ -68,10 +68,10 @@ public class PlayerScript : MonoBehaviour
             newRoad.transform.position = new Vector3(lastRoadPosition.x, lastRoadPosition.y, playerZ + roadLength);
             lastRoadPosition = newRoad.transform.position;
         }
-        if (other.gameObject.tag == "Boost Tile")
+        else if (other.gameObject.tag == "Boost Tile")
         
         {
-            Debug.Log("THIS IS A BOOST TILE (from on Trigger method)");
+            Debug.Log("THIS IS A BOOST TILE ");
              if (speedState == 2)
             {
                 return;
@@ -81,6 +81,37 @@ public class PlayerScript : MonoBehaviour
             speedText.text = "Speed: High";
             jumpZcomponent = 7;
         }
+        else if (other.gameObject.tag == "Burning Tile")
+        
+        {
+            Debug.Log("THIS IS A Burning TILE ");
+           
+        }
+        else if (other.gameObject.tag == "Empty Tile")
+        
+        {
+            Debug.Log("THIS IS AN EMPTY TILE ");
+            
+        }
+        else if (other.gameObject.tag == "Supplies Tile")
+        
+        {
+            Debug.Log("THIS IS A SUPPLIES TILE ");
+            
+        }
+          else if (other.gameObject.tag == "Sticky Tile")
+        
+        {
+            Debug.Log("THIS IS A STICKY TILE ");
+            
+        }
+        else if (other.gameObject.tag == "Obstacle Tile")
+        
+        {
+            Debug.Log("THIS IS AN OBSTACLE TILE ");
+            
+        }
+
     }
 
     private GameObject generateTiles(GameObject newRoad)
@@ -359,6 +390,12 @@ public class PlayerScript : MonoBehaviour
         {
             isJumping = false;
             Roadscript.isAllowedToMove = true;
+        }
+        if (collision.gameObject.tag == "Obstacle Tile")
+        
+        {
+            Debug.Log("THIS IS AN OBSTACLE TILE (collision) ");
+            
         }
     }
 }

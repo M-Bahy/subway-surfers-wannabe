@@ -650,7 +650,7 @@ MonoBehaviour:
   - {fileID: 9210282311107709873, guid: 14132a89efe228faa9346191af3e031c, type: 3}
   - {fileID: 1118608406782883989, guid: ca958ca86dd0011b3b331a0bd074f7ad, type: 3}
   - {fileID: 4392075826794134023, guid: fa25c2cb5a1473abc91634bd65bcb623, type: 3}
-  signPrefab: {fileID: 8383832788356497406, guid: 2d4eb1bbafe9acb0abd5baeeb9bf646b, type: 3}
+  signPrefab: {fileID: 8940007871335169640, guid: c10c16cc912a4bd39aec09adfc20184f, type: 3}
   scoreText: {fileID: 727481451}
   speedText: {fileID: 1073235146}
   fuelText: {fileID: 819318595}

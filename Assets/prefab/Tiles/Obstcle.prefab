@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 527165482037007945}
   m_Layer: 0
   m_Name: Obstcle
-  m_TagString: Obstcle Tile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,6 +43,10 @@ PrefabInstance:
     - target: {fileID: 1373812253380670088, guid: da1ab7c6a17b69c47bb73b641ffea4ca, type: 3}
       propertyPath: m_Name
       value: sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373812253380670088, guid: da1ab7c6a17b69c47bb73b641ffea4ca, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle Tile
       objectReference: {fileID: 0}
     - target: {fileID: 5405372745791804638, guid: da1ab7c6a17b69c47bb73b641ffea4ca, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -95,6 +99,10 @@ PrefabInstance:
     - target: {fileID: 6158029897995163999, guid: da1ab7c6a17b69c47bb73b641ffea4ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629166272150098665, guid: da1ab7c6a17b69c47bb73b641ffea4ca, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
