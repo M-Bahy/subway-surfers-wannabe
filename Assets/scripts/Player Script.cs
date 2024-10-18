@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     public TMP_Text fuelText; // Fuel : 50
 
     private float score = 0f; // Variable to keep track of the score
+    float fuel = 50f; // Variable to keep track of the fuel
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,8 @@ public class PlayerScript : MonoBehaviour
         state = 2;
         score = 0f; // Initialize the score to 0
         UpdateScoreText(); // Update the score text at the start
+        fuel = 50f; // Initialize the fuel to 50
+        UpdateFuelText(); // Update the fuel text at the start
     }
 
     // Update is called once per frame
@@ -48,13 +51,30 @@ public class PlayerScript : MonoBehaviour
     {
         // Increment the score based on the passage of time
         score += Time.deltaTime;
+        fuel -= Time.deltaTime;
         UpdateScoreText(); // Update the score text
+        UpdateFuelText(); // Update the fuel text
     }
 
     private void UpdateScoreText()
     {
+        if(fuel <= 0)
+        {
+            Debug.Log("Game Over");
+        }
+        if (fuel > 50)
+        {
+           fuel = 50;
+        }
+
         // Update the score text to display the current score
         scoreText.text = "Score: " + Mathf.FloorToInt(score).ToString();
+    }
+
+    private void UpdateFuelText()
+    {
+        // Update the fuel text to display the current fuel level
+        fuelText.text = "Fuel: " + Mathf.FloorToInt(fuel).ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -84,7 +104,9 @@ public class PlayerScript : MonoBehaviour
         else if (other.gameObject.tag == "Burning Tile")
         
         {
-            Debug.Log("THIS IS A Burning TILE ");
+            // Debug.Log("THIS IS A Burning TILE ");
+            fuel = fuel - 10;
+            UpdateFuelText();
            
         }
         else if (other.gameObject.tag == "Empty Tile")
