@@ -34,6 +34,7 @@ public class PlayerScript : MonoBehaviour
 
     private float score = 0f; // Variable to keep track of the score
     float fuel = 50f; // Variable to keep track of the fuel
+    int fuelDecreaseRate = 1; // Rate at which the fuel decreases
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +52,7 @@ public class PlayerScript : MonoBehaviour
     {
         // Increment the score based on the passage of time
         score += Time.deltaTime;
-        fuel -= Time.deltaTime;
+        fuel -= Time.deltaTime * fuelDecreaseRate; // Decrease the fuel based on the passage of time
         UpdateScoreText(); // Update the score text
         UpdateFuelText(); // Update the fuel text
     }
@@ -100,14 +101,6 @@ public class PlayerScript : MonoBehaviour
             speedState = 2;
             speedText.text = "Speed: High";
             jumpZcomponent = 7;
-        }
-        else if (other.gameObject.tag == "Burning Tile")
-        
-        {
-            // Debug.Log("THIS IS A Burning TILE ");
-            fuel = fuel - 10;
-            UpdateFuelText();
-           
         }
         else if (other.gameObject.tag == "Empty Tile")
         
@@ -426,6 +419,22 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("THIS IS AN OBSTACLE TILE (collision) ");
             
+        }
+        if (collision.gameObject.tag == "Burning Tile")
+        
+        {
+            Debug.Log("THIS IS A Burning TILE ");
+            fuelDecreaseRate = 10;
+            // fuel -= 10;
+            // UpdateFuelText();
+           
+        }
+    }
+    private void OnCollisionExit(Collision other) {
+        if (other.gameObject.tag == "Burning Tile")
+        
+        {
+            fuelDecreaseRate = 1;
         }
     }
 }
