@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     float moveCooldown = 0.2f;
     float lastMoveTime = 0f;
     float transitionSpeed = 2.0f;
-    float moveSpeed = 7.5f;
+    float moveSpeed = 6;
     float fakeZcomponent = 0.0f;
 
     private Vector3 lastRoadPosition = new Vector3(0.9565115f, -3.598834f, -2.844748f);
@@ -72,6 +72,14 @@ public class PlayerScript : MonoBehaviour
         
         {
             Debug.Log("THIS IS A BOOST TILE (from on Trigger method)");
+             if (speedState == 2)
+            {
+                return;
+            }
+            moveSpeed = moveSpeed * 2;
+            speedState = 2;
+            speedText.text = "Speed: High";
+            jumpZcomponent = 7;
         }
     }
 
@@ -351,10 +359,6 @@ public class PlayerScript : MonoBehaviour
         {
             isJumping = false;
             Roadscript.isAllowedToMove = true;
-        }
-        if (collision.gameObject.tag == "Boost Tile")
-        {
-            Debug.Log("THIS IS A BOOST TILE (from on Collision method)");
         }
     }
 }
