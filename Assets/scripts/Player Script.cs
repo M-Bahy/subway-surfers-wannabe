@@ -35,6 +35,7 @@ public class PlayerScript : MonoBehaviour
     private float score = 0f; // Variable to keep track of the score
     float fuel = 50f; // Variable to keep track of the fuel
     int fuelDecreaseRate = 1; // Rate at which the fuel decreases
+    bool gameOver = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -105,13 +106,19 @@ public class PlayerScript : MonoBehaviour
         else if (other.gameObject.tag == "Empty Tile")
         
         {
-            Debug.Log("THIS IS AN EMPTY TILE ");
+           Destroy(other.gameObject);
+           // give the player a force downwards , remove and other force he had
+              gameOver = true;
+              rb.velocity = new Vector3(0, -20, 0);
+
             
         }
         else if (other.gameObject.tag == "Supplies Tile")
         
         {
             Debug.Log("THIS IS A SUPPLIES TILE ");
+            fuel  = 50;
+            StartCoroutine(DelayFuelDecrease());
             
         }
           else if (other.gameObject.tag == "Sticky Tile")
@@ -136,6 +143,14 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
+
+    private IEnumerator DelayFuelDecrease()
+{
+    float originalFuelDecreaseRate = fuelDecreaseRate;
+    fuelDecreaseRate = 0; // Stop decreasing fuel
+    yield return new WaitForSeconds(0.5f); // Wait for 0.5 seconds
+    fuelDecreaseRate = 1; // Resume decreasing fuel
+}
 
     private GameObject generateTiles(GameObject newRoad)
     {
@@ -316,6 +331,10 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(gameOver)
+        {
+            return;
+        }
         if (!isJumping)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, moveSpeed);
