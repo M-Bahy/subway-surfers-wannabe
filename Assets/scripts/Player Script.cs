@@ -151,7 +151,7 @@ public class PlayerScript : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;
-       // SceneManager.LoadScene("MainMenu"); // Load the main menu scene
+       SceneManager.LoadScene("Title Screen"); // Load the main menu scene
     }
 
 

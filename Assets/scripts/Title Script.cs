@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class TitleScript : MonoBehaviour
 {
 
@@ -23,7 +25,7 @@ public class TitleScript : MonoBehaviour
         playButton.onClick.AddListener(PlayGame);
         optionsButton.onClick.AddListener(Options);
         quitButton.onClick.AddListener(QuitGame);
-        muteButton.onClick.AddListener(Mute);
+       // muteButton.onClick.AddListener(Mute);
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class TitleScript : MonoBehaviour
     public void PlayGame()
     {
         // Load the game scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void Options()
