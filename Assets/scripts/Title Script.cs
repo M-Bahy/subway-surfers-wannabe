@@ -8,6 +8,9 @@ public class TitleScript : MonoBehaviour
     public Button playButton;
     public Button optionsButton;
     public Button quitButton;
+    public Button muteButton;
+
+    bool isMuted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +23,7 @@ public class TitleScript : MonoBehaviour
         playButton.onClick.AddListener(PlayGame);
         optionsButton.onClick.AddListener(Options);
         quitButton.onClick.AddListener(QuitGame);
-        
+        muteButton.onClick.AddListener(Mute);
     }
 
     // Update is called once per frame
@@ -45,5 +48,20 @@ public class TitleScript : MonoBehaviour
     {
         // Quit the game
         Application.Quit();
+    }
+
+    public void Mute()
+    {
+        // Mute the game
+        if (isMuted)
+        {
+            isMuted = false;
+            AudioListener.volume = 1f;
+        }
+        else
+        {
+            isMuted = true;
+            AudioListener.volume = 0f;
+        }
     }
 }
