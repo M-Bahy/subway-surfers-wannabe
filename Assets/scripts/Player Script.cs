@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -36,21 +38,66 @@ public class PlayerScript : MonoBehaviour
     float fuel = 50f; // Variable to keep track of the fuel
     int fuelDecreaseRate = 1; // Rate at which the fuel decreases
     bool gameOver = false; 
+    bool isPaused = false;
+
+    public GameObject pausePanel;
+
+    public Button resumeButton;
+    public Button restartButton;
+
+    public Button mainMenuButton;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        pausePanel.SetActive(false);
         rb = GetComponent<Rigidbody>();
         state = 2;
         score = 0f; // Initialize the score to 0
         UpdateScoreText(); // Update the score text at the start
         fuel = 50f; // Initialize the fuel to 50
         UpdateFuelText(); // Update the fuel text at the start
+
+        resumeButton.onClick.AddListener(ResumeGame);
+        restartButton.onClick.AddListener(RestartGame);
+        mainMenuButton.onClick.AddListener(GoToMainMenu);
+        StartCoroutine(DelayFuelDecrease());
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        // check if the user hit ESC key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                if(gameOver)
+                {
+                   Time.timeScale = 0f;
+                }
+                else
+                {
+                Time.timeScale = 1f;
+                }
+                isPaused = false;
+                pausePanel.SetActive(false);
+                
+
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                isPaused = true;
+                pausePanel.SetActive(true);
+               
+
+            }
+        }
+
+
         // Increment the score based on the passage of time
         score += Time.deltaTime;
         fuel -= Time.deltaTime * fuelDecreaseRate; // Decrease the fuel based on the passage of time
@@ -78,6 +125,41 @@ public class PlayerScript : MonoBehaviour
         // Update the fuel text to display the current fuel level
         fuelText.text = "Fuel: " + Mathf.FloorToInt(fuel).ToString();
     }
+
+    public void ResumeGame()
+    {
+        if(!gameOver)
+        {
+            Time.timeScale = 1f;
+            
+        }
+        else
+        {
+            Time.timeScale = 0f;
+       
+        }
+        isPaused = false;
+        pausePanel.SetActive(false); // Hide the pause screen
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+       // SceneManager.LoadScene("MainMenu"); // Load the main menu scene
+    }
+
+
+    private IEnumerator DelayGameOver()
+{
+    yield return new WaitForSeconds(0.5f); // Wait for 0.5 seconds
+   Time.timeScale = 0f; // Pause the game
+}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -110,6 +192,9 @@ public class PlayerScript : MonoBehaviour
            // give the player a force downwards , remove and other force he had
               gameOver = true;
               rb.velocity = new Vector3(0, -20, 0);
+              // delay 0.5 seconds
+              StartCoroutine(DelayGameOver());
+            //Time.timeScale = 0f;
 
             
         }
