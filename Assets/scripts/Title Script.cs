@@ -16,6 +16,7 @@ public class TitleScript : MonoBehaviour
     public Button soundButton;
     public Button howToPlayButton;
     public Button creditsButton;
+    public Button backButton;
     bool isMuted = false;
      public TMP_Text soundText;
 
@@ -29,6 +30,7 @@ public class TitleScript : MonoBehaviour
         soundButton.onClick.AddListener(Mute);
         howToPlayButton.onClick.AddListener(explainTheGame);
         creditsButton.onClick.AddListener(creditsWhenCreditsAreDue);
+        backButton.onClick.AddListener(Back);
     }
 
     // Update is called once per frame
@@ -84,5 +86,11 @@ public class TitleScript : MonoBehaviour
     }
     public void creditsWhenCreditsAreDue(){
         
+    }
+    public void Back()
+    {
+        mainMenuPanel.SetActive(true);
+        optionsPanel.SetActive(false);
+        backButton.OnDeselect(null);
     }
 }
