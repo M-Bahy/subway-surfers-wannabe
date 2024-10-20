@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TitleScript : MonoBehaviour
 {
@@ -10,22 +11,24 @@ public class TitleScript : MonoBehaviour
     public Button playButton;
     public Button optionsButton;
     public Button quitButton;
-    public Button muteButton;
-
+    public GameObject mainMenuPanel;
+    public GameObject optionsPanel;
+    public Button soundButton;
+    public Button howToPlayButton;
+    public Button creditsButton;
     bool isMuted = false;
+     public TMP_Text soundText;
 
     // Start is called before the first frame update
     void Start()
     {
-        //set the buttons to active
-        // playButton.gameObject.SetActive(true);
-        // optionsButton.gameObject.SetActive(true);
-        // quitButton.gameObject.SetActive(true);
-        // connect the buttons to the functions
+        optionsPanel.SetActive(false);
         playButton.onClick.AddListener(PlayGame);
         optionsButton.onClick.AddListener(Options);
         quitButton.onClick.AddListener(QuitGame);
-       // muteButton.onClick.AddListener(Mute);
+        soundButton.onClick.AddListener(Mute);
+        howToPlayButton.onClick.AddListener(explainTheGame);
+        creditsButton.onClick.AddListener(creditsWhenCreditsAreDue);
     }
 
     // Update is called once per frame
@@ -42,8 +45,8 @@ public class TitleScript : MonoBehaviour
 
     public void Options()
     {
-        // Load the options scene
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
+        mainMenuPanel.SetActive(false);
+        optionsPanel.SetActive(true);
     }
 
     public void QuitGame()
@@ -59,11 +62,24 @@ public class TitleScript : MonoBehaviour
         {
             isMuted = false;
             AudioListener.volume = 1f;
+            soundText.text = "Sound : ON";
+            // mark the button as not pressed
+            soundButton.OnDeselect(null);
+            
         }
         else
         {
             isMuted = true;
             AudioListener.volume = 0f;
+            soundText.text = "Sound : OFF";
+            soundButton.OnDeselect(null);
         }
+    }
+
+    public void explainTheGame(){
+
+    }
+    public void creditsWhenCreditsAreDue(){
+        
     }
 }
