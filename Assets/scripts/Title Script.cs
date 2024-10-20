@@ -41,18 +41,21 @@ public class TitleScript : MonoBehaviour
     {
         // Load the game scene
         SceneManager.LoadScene("SampleScene");
+        playButton.OnDeselect(null);
     }
 
     public void Options()
     {
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(true);
+        optionsButton.OnDeselect(null);
     }
 
     public void QuitGame()
     {
         // Quit the game
         Application.Quit();
+        quitButton.OnDeselect(null);
     }
 
     public void Mute()
@@ -63,8 +66,7 @@ public class TitleScript : MonoBehaviour
             isMuted = false;
             AudioListener.volume = 1f;
             soundText.text = "Sound : ON";
-            // mark the button as not pressed
-            soundButton.OnDeselect(null);
+            
             
         }
         else
@@ -72,8 +74,9 @@ public class TitleScript : MonoBehaviour
             isMuted = true;
             AudioListener.volume = 0f;
             soundText.text = "Sound : OFF";
-            soundButton.OnDeselect(null);
         }
+        // mark the button as not pressed
+        soundButton.OnDeselect(null);
     }
 
     public void explainTheGame(){
