@@ -14,11 +14,13 @@ public class TitleScript : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
     public GameObject htpPanel;
+    public GameObject creditsPanel;
     public Button soundButton;
     public Button howToPlayButton;
     public Button creditsButton;
     public Button backButton;
      public Button htpBackButton;
+     public Button creditsBackButton;
     bool isMuted = false;
      public TMP_Text soundText;
 
@@ -27,6 +29,7 @@ public class TitleScript : MonoBehaviour
     {
         optionsPanel.SetActive(false);
         htpPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         playButton.onClick.AddListener(PlayGame);
         optionsButton.onClick.AddListener(Options);
         quitButton.onClick.AddListener(QuitGame);
@@ -35,6 +38,7 @@ public class TitleScript : MonoBehaviour
         creditsButton.onClick.AddListener(creditsWhenCreditsAreDue);
         backButton.onClick.AddListener(Back);
         htpBackButton.onClick.AddListener(HtpBack);
+        creditsBackButton.onClick.AddListener(CreditsBack);
        if (AudioListener.volume == 0f)
         {
             isMuted = true;
@@ -64,6 +68,7 @@ public class TitleScript : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         htpPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         optionsPanel.SetActive(true);
         optionsButton.OnDeselect(null);
     }
@@ -99,25 +104,45 @@ public class TitleScript : MonoBehaviour
     public void explainTheGame(){
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         htpPanel.SetActive(true);
         htpBackButton.OnDeselect(null);
 
     }
     public void creditsWhenCreditsAreDue(){
+        mainMenuPanel.SetActive(false);
+        optionsPanel.SetActive(false);
+        htpPanel.SetActive(false);
+        creditsPanel.SetActive(true);
+        creditsBackButton.OnDeselect(null);
         
     }
     public void Back()
     {
         mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         htpPanel.SetActive(false);
         backButton.OnDeselect(null);
     }
      public void HtpBack()
     {
         mainMenuPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         optionsPanel.SetActive(true);
         htpPanel.SetActive(false);
         htpBackButton.OnDeselect(null);
     }
+
+    public void CreditsBack()
+    {
+       mainMenuPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        optionsPanel.SetActive(true);
+        htpPanel.SetActive(false);
+        creditsBackButton.OnDeselect(null);
+    }
+    
+        
+    
 }
