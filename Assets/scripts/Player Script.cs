@@ -168,8 +168,9 @@ public class PlayerScript : MonoBehaviour
             GameObject newRoad = Instantiate(road);
             newRoad = generateTiles(newRoad);
             float roadLength = 23.0f;
+            float errorOffset = 0.26f;
             float playerZ = transform.position.z;
-            newRoad.transform.position = new Vector3(lastRoadPosition.x, lastRoadPosition.y, playerZ + roadLength);
+            newRoad.transform.position = new Vector3(lastRoadPosition.x, lastRoadPosition.y, playerZ + roadLength - errorOffset);
             lastRoadPosition = newRoad.transform.position;
         }
         else if (other.gameObject.tag == "Boost Tile")
