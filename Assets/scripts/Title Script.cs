@@ -31,6 +31,7 @@ public class TitleScript : MonoBehaviour
         howToPlayButton.onClick.AddListener(explainTheGame);
         creditsButton.onClick.AddListener(creditsWhenCreditsAreDue);
         backButton.onClick.AddListener(Back);
+        AudioListener.volume = 1f;
     }
 
     // Update is called once per frame
