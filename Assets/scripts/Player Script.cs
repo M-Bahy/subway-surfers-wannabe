@@ -69,9 +69,12 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameOver){
+            return;
+        }
 
         // check if the user hit ESC key
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) )
         {
             if (isPaused)
             {
@@ -160,8 +163,9 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator DelayGameOver()
 {
-    yield return new WaitForSeconds(0.5f); // Wait for 0.5 seconds
+    yield return new WaitForSeconds(3); // Wait for 0.5 seconds
    Time.timeScale = 0f; // Pause the game
+    SceneManager.LoadScene("Game OverScene");
 }
 
     private void OnTriggerEnter(Collider other)
@@ -198,8 +202,8 @@ public class PlayerScript : MonoBehaviour
               rb.velocity = new Vector3(0, -20, 0);
               // delay 0.5 seconds
               StartCoroutine(DelayGameOver());
-              Time.timeScale = 0f;
-              SceneManager.LoadScene("Game OverScene");
+             // Time.timeScale = 0f;
+             
             //Time.timeScale = 0f;
 
             
