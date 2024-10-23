@@ -46,6 +46,7 @@ public class PlayerScript : MonoBehaviour
     public Button restartButton;
 
     public Button mainMenuButton;
+    // Game OverScene
     
 
     // Start is called before the first frame update
@@ -109,7 +110,9 @@ public class PlayerScript : MonoBehaviour
     {
         if(fuel <= 0)
         {
-            Debug.Log("Game Over");
+            gameOver = true;
+            Time.timeScale = 0f;
+            SceneManager.LoadScene("Game OverScene");
         }
         if (fuel > 50)
         {
@@ -195,6 +198,8 @@ public class PlayerScript : MonoBehaviour
               rb.velocity = new Vector3(0, -20, 0);
               // delay 0.5 seconds
               StartCoroutine(DelayGameOver());
+              Time.timeScale = 0f;
+              SceneManager.LoadScene("Game OverScene");
             //Time.timeScale = 0f;
 
             
@@ -227,6 +232,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("THIS IS AN OBSTACLE TILE ");
             gameOver = true;
             Time.timeScale = 0f;
+            SceneManager.LoadScene("Game OverScene");
             
         }
 

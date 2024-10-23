@@ -240,6 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1ae64b410076de0b856d055d8bebcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 444725886}
+  restartButton: {fileID: 1701237175}
+  mainMenuButton: {fileID: 257157093}
 --- !u!1 &257157091
 GameObject:
   m_ObjectHideFlags: 0

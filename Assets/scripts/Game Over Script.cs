@@ -17,7 +17,8 @@ public class GameOverScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = "Score : " + PlayerScript.score.ToString();
+        
+        scoreText.text = "Final Score : " + Mathf.FloorToInt(PlayerScript.score).ToString();
         restartButton.onClick.AddListener(RestartGame);
         mainMenuButton.onClick.AddListener(GoToMainMenu);
         
