@@ -183,6 +183,7 @@ public class PlayerScript : MonoBehaviour
         else if (other.gameObject.tag == "Boost Tile")
         
         {
+            audioManager.PlaySFX(audioManager.boostTile);
             Debug.Log("THIS IS A BOOST TILE ");
              if (speedState == 2)
             {
@@ -196,6 +197,7 @@ public class PlayerScript : MonoBehaviour
         else if (other.gameObject.tag == "Empty Tile")
         
         {
+            audioManager.PlaySFX(audioManager.emptyTile);
            Destroy(other.gameObject);
            // give the player a force downwards , remove and other force he had
               gameOver = true;
@@ -211,6 +213,7 @@ public class PlayerScript : MonoBehaviour
         else if (other.gameObject.tag == "Supplies Tile")
         
         {
+            audioManager.PlaySFX(audioManager.suppliesTile);
             Debug.Log("THIS IS A SUPPLIES TILE ");
             fuel  = 50;
             StartCoroutine(DelayFuelDecrease());
@@ -219,6 +222,7 @@ public class PlayerScript : MonoBehaviour
           else if (other.gameObject.tag == "Sticky Tile")
         
         {
+            audioManager.PlaySFX(audioManager.stickyTile);
             // Debug.Log("THIS IS A STICKY TILE ");
              if (speedState == 1)
             {
@@ -233,10 +237,13 @@ public class PlayerScript : MonoBehaviour
         else if (other.gameObject.tag == "Obstacle Tile")
         
         {
+            audioManager.PlaySFX(audioManager.obstacleTile);
             Debug.Log("THIS IS AN OBSTACLE TILE ");
             gameOver = true;
-            Time.timeScale = 0f;
-            SceneManager.LoadScene("Game OverScene");
+            rb.isKinematic = true;
+           Roadscript.isAllowedToMove = false;
+           // Time.timeScale = 0f;
+             StartCoroutine(DelayGameOver());
             
         }
 
@@ -542,6 +549,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.tag == "Burning Tile")
         
         {
+            audioManager.PlaySFX(audioManager.burningTile);
             Debug.Log("THIS IS A Burning TILE ");
             fuelDecreaseRate = 10;
             // fuel -= 10;
