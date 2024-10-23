@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     int speedState = 1; // 1: Normal , 2: High
     public TMP_Text fuelText; // Fuel : 50
 
-    private float score = 0f; // Variable to keep track of the score
+    public static float score = 0f; // Variable to keep track of the score
     float fuel = 50f; // Variable to keep track of the fuel
     int fuelDecreaseRate = 1; // Rate at which the fuel decreases
     bool gameOver = false; 
