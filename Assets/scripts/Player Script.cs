@@ -477,6 +477,7 @@ public class PlayerScript : MonoBehaviour
                     if (!invalidMoveDetected || Time.time - lastInvalidMoveTime > invalidMoveCooldown)
                     {
                         Debug.Log("Invalid move");
+                        audioManager.PlaySFX(audioManager.invalidAction);
                         invalidMoveDetected = true;
                         lastInvalidMoveTime = Time.time;
                     }
@@ -493,6 +494,7 @@ public class PlayerScript : MonoBehaviour
                     if (!invalidMoveDetected || Time.time - lastInvalidMoveTime > invalidMoveCooldown)
                     {
                         Debug.Log("Invalid move");
+                        audioManager.PlaySFX(audioManager.invalidAction);
                         invalidMoveDetected = true;
                         lastInvalidMoveTime = Time.time;
                     }
