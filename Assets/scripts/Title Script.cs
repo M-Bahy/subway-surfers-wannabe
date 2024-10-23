@@ -24,9 +24,18 @@ public class TitleScript : MonoBehaviour
     bool isMuted = false;
      public TMP_Text soundText;
 
+      AudioManagerScript audioManager;
+    
+
+
+    private void Awake() {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagerScript>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        audioManager.PlayBackground(audioManager.menu);
         optionsPanel.SetActive(false);
         htpPanel.SetActive(false);
         creditsPanel.SetActive(false);

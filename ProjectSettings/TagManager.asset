@@ -14,6 +14,7 @@ TagManager:
   - Boost Tile
   - Sticky Tile
   - Obstacle Tile
+  - Audio
   layers:
   - Default
   - TransparentFX

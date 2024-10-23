@@ -15,9 +15,17 @@ public class GameOverScript : MonoBehaviour
 
     public Button mainMenuButton;
     // Start is called before the first frame update
+
+     AudioManagerScript audioManager;
+    
+
+
+    private void Awake() {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagerScript>();
+    }
     void Start()
     {
-        
+        audioManager.PlayBackground(audioManager.menu);
         scoreText.text = "Final Score : " + Mathf.FloorToInt(PlayerScript.score).ToString();
         restartButton.onClick.AddListener(RestartGame);
         mainMenuButton.onClick.AddListener(GoToMainMenu);

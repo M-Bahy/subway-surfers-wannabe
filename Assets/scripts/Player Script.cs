@@ -46,12 +46,19 @@ public class PlayerScript : MonoBehaviour
     public Button restartButton;
 
     public Button mainMenuButton;
-    // Game OverScene
     
+    AudioManagerScript audioManager;
+    
+
+
+    private void Awake() {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagerScript>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        audioManager.PlayBackground(audioManager.background);
         pausePanel.SetActive(false);
         rb = GetComponent<Rigidbody>();
         state = 2;
@@ -78,17 +85,10 @@ public class PlayerScript : MonoBehaviour
         {
             if (isPaused)
             {
-                if(gameOver)
-                {
-                   Time.timeScale = 0f;
-                }
-                else
-                {
                 Time.timeScale = 1f;
-                }
                 isPaused = false;
                 pausePanel.SetActive(false);
-                
+                audioManager.PlayBackground(audioManager.background);
 
             }
             else
@@ -96,7 +96,7 @@ public class PlayerScript : MonoBehaviour
                 Time.timeScale = 0f;
                 isPaused = true;
                 pausePanel.SetActive(true);
-               
+                audioManager.PlayBackground(audioManager.menu);
 
             }
         }
