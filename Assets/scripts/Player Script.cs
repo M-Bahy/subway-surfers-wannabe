@@ -146,6 +146,7 @@ public class PlayerScript : MonoBehaviour
         }
         isPaused = false;
         pausePanel.SetActive(false); // Hide the pause screen
+        audioManager.PlayBackground(audioManager.background);
     }
 
     public void RestartGame()
